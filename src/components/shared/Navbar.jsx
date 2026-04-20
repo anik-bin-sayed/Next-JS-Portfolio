@@ -8,8 +8,8 @@ import Logo from "../ui/Logo";
 const menuItems = [
   { name: "Home", link: "/" },
   { name: "About", link: "/about" },
-  { name: "Skills", link: "/skills" },
-  { name: "Projects", link: "/projects" },
+  { name: "Service", link: "/service" },
+  { name: "Portfolio", link: "/portfolio" },
   { name: "Contact", link: "/contact" },
 ];
 
@@ -159,8 +159,10 @@ const Navbar = () => {
               >
                 {item.name}
                 <span
-                  className={`absolute left-0 -bottom-1 h-0.5 bg-red-500 transition-all duration-300 ${
-                    isActive ? "w-full" : "w-0 group-hover:w-full"
+                  className={`absolute -bottom-1 h-0.5 bg-red-500 transition-all duration-300 ${
+                    isActive
+                      ? "w-1.5 h-1.5 rounded-full left-1/2 -translate-x-1/2"
+                      : "left-0 w-0 group-hover:w-full"
                   }`}
                 />
               </Link>

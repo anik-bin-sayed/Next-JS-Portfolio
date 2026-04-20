@@ -4,6 +4,7 @@ import React, { useRef, useEffect, useState } from "react";
 import Image from "next/image";
 import SocialIcons from "../ui/SocialIcons";
 import Link from "next/link";
+import LinkButton from "../ui/LinkButton";
 
 const HeroSection = () => {
   const imageRef = useRef(null);
@@ -86,12 +87,7 @@ const HeroSection = () => {
             Focused on creating elegant solutions to complex problems.
           </p>
           <div className="flex gap-4 justify-center lg:justify-start">
-            <Link
-              href=""
-              className="px-6 py-3 rounded-lg bg-red-600 hover:bg-red-700 transition font-semibold shadow-lg shadow-red-600/30"
-            >
-              View Work (Github)
-            </Link>
+            <LinkButton text="View Work (Github)" link="" />
 
             <a
               href="/contact"
@@ -99,23 +95,6 @@ const HeroSection = () => {
             >
               Contact
             </a>
-          </div>
-          <div className="flex flex-wrap gap-2 justify-center lg:justify-start pt-4">
-            {[
-              "React",
-              "Next JS",
-              "Node.js",
-              "Django",
-              "FastApi",
-              "Tailwind",
-            ].map((item) => (
-              <span
-                key={item}
-                className="px-3 py-1 text-sm bg-white/5 border border-white/10 rounded-full hover:border-red-500 transition"
-              >
-                {item}
-              </span>
-            ))}
           </div>
         </div>
         <div className="flex justify-center lg:justify-end relative">
