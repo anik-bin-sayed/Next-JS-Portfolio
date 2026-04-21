@@ -8,6 +8,7 @@ import { FaArrowUpLong } from "react-icons/fa6";
 import { FaWhatsapp } from "react-icons/fa";
 
 import SocialIcons from "../ui/SocialIcons";
+import Logo from "../ui/Logo";
 
 const navItems = [
   { name: "Home", link: "/" },
@@ -45,13 +46,7 @@ const Footer = () => {
       <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 py-12 md:py-16">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12">
           <div className="md:col-span-4 space-y-4">
-            <h1 className="text-3xl md:text-4xl font-bold tracking-tight flex items-center group cursor-default">
-              AN
-              <span className="text-red-500 text-4xl md:text-5xl px-1 transition-transform duration-300 group-hover:scale-110 inline-block">
-                i
-              </span>
-              K
-            </h1>
+            <Logo />
 
             <p className="text-gray-400 text-sm leading-relaxed max-w-xs">
               Crafting modern digital experiences with precision and creativity.

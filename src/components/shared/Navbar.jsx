@@ -6,7 +6,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import Logo from "../ui/Logo";
-import "./navbar.css";
 
 const menuItems = [
   { name: "Home", link: "/" },
@@ -22,7 +21,6 @@ const Navbar = () => {
   const pathname = usePathname();
 
   const menuRef = useRef(null);
-  const particlesRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -31,109 +29,6 @@ const Navbar = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  useEffect(() => {
-    const navbar = menuRef.current;
-    const particlesContainer = particlesRef.current;
-    if (!navbar || !particlesContainer) return;
-
-    let timeouts = [];
-    let particles = [];
-
-    const createParticle = () => {
-      const particle = document.createElement("div");
-      particle.className = "particle";
-      const size = Math.random() * 3 + 1;
-      particle.style.width = `${size}px`;
-      particle.style.height = `${size}px`;
-      particlesContainer.appendChild(particle);
-      particles.push(particle);
-      animateParticle(particle);
-    };
-
-    const resetParticle = (particle) => {
-      const x = Math.random() * 100;
-      const y = Math.random() * 100;
-      particle.style.left = `${x}%`;
-      particle.style.top = `${y}%`;
-      particle.style.opacity = "0";
-      return { x, y };
-    };
-
-    const animateParticle = (particle) => {
-      const pos = resetParticle(particle);
-      const duration = Math.random() * 5 + 5;
-      const timeout1 = setTimeout(() => {
-        particle.style.transition = `all ${duration}s linear`;
-        particle.style.opacity = Math.random() * 0.3 + 0.1;
-        particle.style.left = `${pos.x + (Math.random() * 10 - 5)}%`;
-        particle.style.top = `${pos.y + (Math.random() * 10 - 5)}%`;
-
-        const timeout2 = setTimeout(() => {
-          animateParticle(particle);
-        }, duration * 1000);
-        timeouts.push(timeout2);
-      }, Math.random() * 2000);
-      timeouts.push(timeout1);
-    };
-
-    for (let i = 0; i < 20; i++) {
-      createParticle();
-    }
-
-    const handleMouseMove = (e) => {
-      const rect = navbar.getBoundingClientRect();
-      const x = ((e.clientX - rect.left) / rect.width) * 100;
-      const y = ((e.clientY - rect.top) / rect.height) * 100;
-
-      const particle = document.createElement("div");
-      particle.className = "particle";
-      particle.style.width = "4px";
-      particle.style.height = "4px";
-      particle.style.left = `${x}%`;
-      particle.style.top = `${y}%`;
-      particle.style.opacity = "0.2";
-      particlesContainer.appendChild(particle);
-      particles.push(particle);
-
-      const timeout = setTimeout(() => {
-        particle.style.transition = "all 1.5s ease-out";
-        particle.style.opacity = "0";
-        particle.style.transform = "scale(0.5)";
-        particle.style.left = `${x + (Math.random() * 10 - 5)}%`;
-        particle.style.top = `${y + (Math.random() * 10 - 5)}%`;
-
-        const removeTimeout = setTimeout(() => {
-          if (particle.parentNode) particle.remove();
-          particles = particles.filter((p) => p !== particle);
-        }, 1500);
-        timeouts.push(removeTimeout);
-      }, 50);
-      timeouts.push(timeout);
-    };
-
-    navbar.addEventListener("mousemove", handleMouseMove);
-
-    return () => {
-      navbar.removeEventListener("mousemove", handleMouseMove);
-      timeouts.forEach(clearTimeout);
-      particles.forEach((particle) => {
-        if (particle.parentNode) particle.remove();
-      });
-      if (particlesContainer) particlesContainer.innerHTML = "";
-    };
-  }, []);
-
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [isOpen]);
 
   return (
     <header
@@ -144,8 +39,6 @@ const Navbar = () => {
           : "bg-transparent py-4"
       }`}
     >
-      <div className="particles-container" ref={particlesRef} />
-
       <div className="max-w-7xl mx-auto flex justify-between items-center w-[90%]">
         <Logo />
 

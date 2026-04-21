@@ -14,25 +14,23 @@ const ContactSection = () => {
   const [formData, setFormData] = useState(initialState);
   const [error, setError] = useState({});
   const [success, setSuccess] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const validate = () => {
     const newErrors = {};
 
-    // Name validation
     if (!formData.name.trim()) {
       newErrors.name = "Name is required";
     } else if (formData.name.length < 3) {
       newErrors.name = "Name must be at least 3 characters";
     }
 
-    // Email validation
     if (!formData.email.trim()) {
       newErrors.email = "Email is required";
     } else if (!/^\S+@\S+\.\S+$/.test(formData.email)) {
       newErrors.email = "Invalid email address";
     }
 
-    // Message validation
     if (!formData.message.trim()) {
       newErrors.message = "Message is required";
     } else if (formData.message.length < 10) {
@@ -43,26 +41,44 @@ const ContactSection = () => {
   };
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.id]: e.target.value });
-
-    setError((prev) => ({ ...prev, [e.target.id]: "" }));
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setError((prev) => ({ ...prev, [e.target.name]: "" }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const validationErrors = validate();
-
     if (Object.keys(validationErrors).length > 0) {
       setError(validationErrors);
       return;
     }
 
-    setError({});
-    setSuccess("Message sent successfully!");
-    console.log("Form submitted:", formData);
+    setLoading(true);
 
-    setFormData(initialState);
+    try {
+      const res = await fetch("https://formspree.io/f/xkokqoqk", {
+        method: "POST",
+        body: JSON.stringify(formData),
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      });
+
+      if (res.ok) {
+        setSuccess("Message sent successfully!");
+        setFormData(initialState);
+        setError({});
+      } else {
+        setSuccess("");
+        setError({ form: "Failed to send message!" });
+      }
+    } catch (err) {
+      setError({ form: "Something went wrong!" });
+    }
+
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -125,6 +141,7 @@ const ContactSection = () => {
                 <input
                   type="text"
                   id="name"
+                  name="name"
                   value={formData.name}
                   onChange={handleChange}
                   className="w-full px-4 py-3 bg-black/50 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-rose-500/50 focus:ring-1 focus:ring-rose-500/50 transition-colors"
@@ -145,6 +162,7 @@ const ContactSection = () => {
                 <input
                   type="email"
                   id="email"
+                  name="email"
                   value={formData.email}
                   onChange={handleChange}
                   className="w-full px-4 py-3 bg-black/50 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-rose-500/50 focus:ring-1 focus:ring-rose-500/50 transition-colors"
@@ -164,6 +182,7 @@ const ContactSection = () => {
                 </label>
                 <textarea
                   id="message"
+                  name="message"
                   rows={4}
                   value={formData.message}
                   onChange={handleChange}
@@ -177,9 +196,9 @@ const ContactSection = () => {
 
               <button
                 type="submit"
-                className="w-full py-3 px-6 rounded-lg bg-linear-to-r from-rose-500 to-rose-600 text-white font-semibold hover:from-rose-600 hover:to-rose-700 transition-all duration-300 transform  focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-offset-2 focus:ring-offset-black cursor-pointer"
+                className="w-full py-3 px-6 rounded-lg bg-linear-to-r from-rose-500 to-rose-600 text-white font-semibold hover:from-rose-600 hover:to-rose-700 transition-all duration-300 transform  focus:outline-none focus:ring-0 focus:ring-offset-0 cursor-pointer"
               >
-                SUBMIT
+                {loading ? "Sending..." : "SUBMIT"}
               </button>
               {success && (
                 <p className="text-green-400 font-medium">{success}</p>
