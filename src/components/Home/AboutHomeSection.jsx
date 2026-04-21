@@ -46,9 +46,8 @@ const AboutHomeSection = () => {
               <span className="text-red-600">& beautiful websites</span>
             </h2>
 
-            {/* Description */}
             <div className="mt-4">
-              <p className="text-gray-300 text-base sm:text-lg leading-relaxed">
+              <p className="text-gray-300 text-base sm:text-md leading-relaxed">
                 I'm a passionate Full Stack Developer who enjoys building
                 modern, fast, and scalable web applications. I focus on solving
                 real-world problems through clean architecture and efficient
@@ -59,7 +58,6 @@ const AboutHomeSection = () => {
               </p>
             </div>
 
-            {/* Tech stack - simpler chips */}
             <div className="flex flex-wrap gap-2 pt-4">
               {[
                 "Python",
@@ -69,9 +67,9 @@ const AboutHomeSection = () => {
                 "TypeScript",
                 "Node.js",
                 "Tailwind CSS",
-              ].map((tech) => (
+              ].map((tech, index) => (
                 <span
-                  key={tech}
+                  key={index}
                   className="px-3 py-1 text-xs rounded-full bg-white/5 border hover:border-red-600 border-white/10 text-gray-300"
                 >
                   {tech}
@@ -84,38 +82,32 @@ const AboutHomeSection = () => {
             </div>
           </div>
 
-          {/* Right Column - Experience Cards (simpler) */}
           <div className="space-y-6">
             <div className="space-y-5">
-              {/* Card 1 */}
               <div className="p-5 rounded-xl bg-white/5 border border-white/10">
-                <p className="text-gray-300 leading-relaxed">
-                  I am an enthusiastic web developer based in New York, with a
-                  rich experience of over 6 years in website & product design.
+                <p className="text-gray-300 leading-relaxed text-justify">
+                  I am a passionate web developer focused on building modern and
+                  scalable web applications.I am strengthening my skills in
+                  React, Next.js, and backend technologies while continuously
+                  improving my problem-solving abilities.
                 </p>
               </div>
 
-              {/* Card 2 */}
               <div className="p-5 rounded-xl bg-white/5 border border-white/10">
-                <p className="text-gray-300 leading-relaxed">
-                  With years of experience in graphic and web design I have
-                  mastered the skills of understanding client requirements
-                  according to the latest trends. I have worked with businesses
-                  from different niches so you can rely on me for yours.
+                <p className="text-gray-300 leading-relaxed text-justify">
+                  I enjoy turning ideas into real-world projects. From designing
+                  responsive user interfaces to working with APIs and databases,
+                  I am constantly exploring new tools and best practices to
+                  write clean and efficient code.
                 </p>
               </div>
 
-              {/* Card 3 */}
               <div className="p-5 rounded-xl bg-white/5 border border-white/10">
-                <p className="text-gray-300 leading-relaxed">
-                  I've spent most of these years working across different areas
-                  of design like front-end development, landing pages, email
-                  design, app UI/UX, to my current role designing products for
-                  mobile platforms. Having worked on various projects that are
-                  already live, I can help you with the best possible
-                  suggestions and ideas that we can proceed with. With me, you
-                  aren't forced to accept anything — I give you a variety of
-                  options we can work on together.
+                <p className="text-gray-300 leading-relaxed text-justify">
+                  I am highly motivated to grow as a software developer and
+                  build impactful products. I believe in continuous learning,
+                  experimenting with new technologies, and improving every day
+                  to reach a professional level in the tech industry.
                 </p>
               </div>
             </div>

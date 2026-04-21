@@ -22,8 +22,9 @@ const Portfolio = () => {
   return (
     <section
       id="projects"
-      className="relative w-full py-24 px-6 md:px-20 bg-[#050505] text-white overflow-hidden"
+      className="relative w-full py-24 px-6 md:px-20 bg-black text-white overflow-hidden"
     >
+      <div className="absolute inset-0 bg-linear-to-b from-black to-gray-900" />
       <div className="absolute top-0 -right-40 w-96 h-96 bg-purple-600/20 rounded-full blur-[120px] animate-pulse" />
       <div className="absolute bottom-0 -left-40 w-96 h-96 bg-crimson/20 rounded-full blur-[120px] animate-pulse delay-1000" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-150 h-150 bg-blue-600/10 rounded-full blur-[150px]" />
@@ -136,7 +137,10 @@ const Portfolio = () => {
         </div>
 
         <div className="text-center mt-12">
-          <LinkButton text="View All Project On Github" link="/" />
+          <LinkButton
+            text="View All Project On Github"
+            link="https://github.com/anik-bin-sayed"
+          />
         </div>
       </div>
     </section>

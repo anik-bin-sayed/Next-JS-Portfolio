@@ -72,7 +72,7 @@ const HeroSection = () => {
       <div className="max-w-7xl w-full grid lg:grid-cols-2 gap-10 items-center z-10 py-20">
         <div className="space-y-6 text-center lg:text-left">
           <p className="text-sm text-red-400 uppercase tracking-widest">
-            Available for work
+            Welcome To my portfolio
           </p>
 
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold">
@@ -87,14 +87,17 @@ const HeroSection = () => {
             Focused on creating elegant solutions to complex problems.
           </p>
           <div className="flex gap-4 justify-center lg:justify-start">
-            <LinkButton text="View Work (Github)" link="" />
+            <LinkButton
+              text="View Work (Github)"
+              link="https://github.com/anik-bin-sayed"
+            />
 
-            <a
+            <Link
               href="/contact"
               className="px-6 py-3 rounded-lg border border-gray-600 hover:border-red-500 transition"
             >
               Contact
-            </a>
+            </Link>
           </div>
         </div>
         <div className="flex justify-center lg:justify-end relative">

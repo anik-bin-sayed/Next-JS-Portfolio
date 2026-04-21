@@ -1,4 +1,9 @@
 import React from "react";
+import { AiTwotoneDollarCircle } from "react-icons/ai";
+import { BiDollarCircle } from "react-icons/bi";
+import { FaRegEye, FaSearch } from "react-icons/fa";
+import { PiTimerLight } from "react-icons/pi";
+import { TiSupport } from "react-icons/ti";
 
 const AboutSegment = () => {
   const reasons = [
@@ -26,107 +31,31 @@ const AboutSegment = () => {
       title: "Fast & Responsive",
       description:
         "Every project is optimized for speed and works flawlessly across all devices and screen sizes.",
-      icon: (
-        <svg
-          className="w-6 h-6"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={1.5}
-            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-          />
-        </svg>
-      ),
+      icon: <PiTimerLight className="w-6 h-6" />,
     },
     {
       title: "Pixel Perfect Design",
       description:
         "Attention to every detail ensures that the final product matches the design perfectly.",
-      icon: (
-        <svg
-          className="w-6 h-6"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={1.5}
-            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-          />
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={1.5}
-            d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-          />
-        </svg>
-      ),
+      icon: <FaRegEye className="w-6 h-6" />,
     },
     {
       title: "SEO Optimized",
       description:
         "Built-in SEO best practices to help your website rank higher and reach more audience.",
-      icon: (
-        <svg
-          className="w-6 h-6"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={1.5}
-            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-          />
-        </svg>
-      ),
+      icon: <FaSearch className="w-6 h-6" />,
     },
     {
       title: "24/7 Support",
       description:
         "I'm always available to help with any issues or questions even after the project is complete.",
-      icon: (
-        <svg
-          className="w-6 h-6"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={1.5}
-            d="M18.364 5.636L16.95 7.05M12 3v2m-6.364.636L7.05 7.05M4 12h2m10 0h2M5.636 18.364L7.05 16.95M12 19v2m6.364-.636L16.95 18.05M12 15a3 3 0 100-6 3 3 0 000 6z"
-          />
-        </svg>
-      ),
+      icon: <TiSupport className="w-6 h-6" />,
     },
     {
       title: "Affordable & On Time",
       description:
         "Quality work delivered within deadlines and budget without any hidden costs.",
-      icon: (
-        <svg
-          className="w-6 h-6"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={1.5}
-            d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-          />
-        </svg>
-      ),
+      icon: <BiDollarCircle className="w-6 h-6" />,
     },
   ];
 

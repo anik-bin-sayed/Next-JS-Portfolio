@@ -1,86 +1,34 @@
 import React from "react";
+import { FaDesktop } from "react-icons/fa";
+import { FiTrendingUp } from "react-icons/fi";
+import { SiVorondesign } from "react-icons/si";
+import { TbWorldCheck } from "react-icons/tb";
 
 const ServiceSegment = () => {
   const services = [
     {
-      title: "UI/UX Design",
+      title: "Web Design",
       description:
-        "I create intuitive, user-centered interfaces that deliver exceptional experiences and keep users engaged.",
-      icon: (
-        <svg
-          className="w-6 h-6"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={1.5}
-            d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-          />
-        </svg>
-      ),
+        "I design clean, modern, and responsive user interfaces that focus on usability and a smooth user experience across all devices.",
+      icon: <FaDesktop className="w-8 h-8 text-rose-400" />,
     },
     {
-      title: "Web Development",
+      title: "Frontend Development",
       description:
-        "Modern, fast, and scalable websites built with the latest technologies like React, Next.js, and Tailwind.",
-      icon: (
-        <svg
-          className="w-6 h-6"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={1.5}
-            d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.66 0 3-4 3-9s-1.34-9-3-9m0 18c-1.66 0-3-4-3-9s1.34-9 3-9"
-          />
-        </svg>
-      ),
+        "I build fast and interactive user interfaces using React, Next.js, and Tailwind CSS with a focus on performance and reusable components.",
+      icon: <SiVorondesign className="w-8 h-8 text-rose-400" />,
     },
     {
-      title: "Mobile App Development",
+      title: "Full Stack Development",
       description:
-        "Cross-platform and native mobile apps that provide a seamless experience on iOS and Android devices.",
-      icon: (
-        <svg
-          className="w-6 h-6"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={1.5}
-            d="M12 18h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"
-          />
-        </svg>
-      ),
+        "I develop complete web applications by integrating frontend and backend, including API integration and database management.",
+      icon: <TbWorldCheck className="w-8 h-8 text-rose-400" />,
     },
     {
-      title: "SEO & Performance",
+      title: "Website Optimization",
       description:
-        "Optimize your website for search engines and lightning-fast load times to boost rankings and conversions.",
-      icon: (
-        <svg
-          className="w-6 h-6"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={1.5}
-            d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
-          />
-        </svg>
-      ),
+        "I improve website performance, loading speed, and basic SEO practices to ensure a better user experience and visibility.",
+      icon: <FiTrendingUp className="w-6 h-6 text-rose-400" />,
     },
   ];
 
@@ -114,7 +62,7 @@ const ServiceSegment = () => {
               key={index}
               className="group relative p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-rose-500/30 transition-all duration-300 hover:scale-[1.02]"
             >
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-rose-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="absolute inset-0 rounded-2xl bg-linear-to-br from-rose-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
               <div className="relative z-10">
                 <div className="mb-4 inline-flex p-3 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-400 group-hover:bg-rose-500/20 transition-colors">
@@ -129,7 +77,7 @@ const ServiceSegment = () => {
                   {service.description}
                 </p>
 
-                <div className="mt-4 w-10 h-px bg-gradient-to-r from-rose-500 to-transparent group-hover:w-full transition-all duration-500" />
+                <div className="mt-4 w-10 h-px bg-linear-to-r from-rose-500 to-transparent group-hover:w-full transition-all duration-500" />
               </div>
             </div>
           ))}

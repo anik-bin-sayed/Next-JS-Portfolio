@@ -1,9 +1,12 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
+
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+
 import Logo from "../ui/Logo";
+import "./navbar.css";
 
 const menuItems = [
   { name: "Home", link: "/" },
@@ -198,22 +201,6 @@ const Navbar = () => {
           ))}
         </ul>
       </div>
-
-      <style jsx>{`
-        .particles-container {
-          position: absolute;
-          inset: 0;
-          pointer-events: none;
-          overflow: hidden;
-          z-index: 0;
-        }
-        .particle {
-          position: absolute;
-          background-color: rgba(255, 255, 255, 0.6);
-          border-radius: 50%;
-          pointer-events: none;
-        }
-      `}</style>
     </header>
   );
 };

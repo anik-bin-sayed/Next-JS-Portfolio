@@ -63,14 +63,12 @@ const AboutPageTopSection = () => {
             <div className="absolute -bottom-2 left-0 w-20 h-1 bg-linear-to-r from-red-500 to-orange-400 rounded-full mx-auto lg:mx-0" />
           </div>
 
-          {/* Description card */}
           <div className="backdrop-blur-sm bg-white/5 rounded-2xl p-6 border border-white/10 shadow-xl">
             <p className="text-gray-300 text-base md:text-lg leading-relaxed">
               {ABOUT_TEXT.desc}
             </p>
           </div>
 
-          {/* Skills section */}
           <div className="space-y-3">
             <h3 className="text-sm uppercase tracking-wider text-gray-400 font-semibold flex items-center justify-center lg:justify-start gap-2">
               <span className="w-8 h-px bg-red-500/50" />
@@ -93,9 +91,12 @@ const AboutPageTopSection = () => {
             </div>
           </div>
 
-          {/* CTA Button */}
           <div className="pt-4 flex justify-center lg:justify-start">
-            <LinkButton text="Download CV" isDownload={true} />
+            <LinkButton
+              text="Download CV"
+              isDownload={true}
+              link="/cv/cv.pdf"
+            />
           </div>
         </div>
       </div>
