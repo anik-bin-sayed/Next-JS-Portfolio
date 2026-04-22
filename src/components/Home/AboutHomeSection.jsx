@@ -78,7 +78,7 @@ const AboutHomeSection = () => {
             </div>
 
             <div className="pt-6">
-              <LinkButton text="Let's work together" link="" />
+              <LinkButton text="Let's work together" link="/contact" />
             </div>
           </div>
 

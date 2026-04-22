@@ -47,10 +47,10 @@ const Portfolio = () => {
             <button
               key={cat.value}
               onClick={() => setFilter(cat.value)}
-              className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
+              className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-200  ${
                 filter === cat.value
-                  ? "bg-crimson text-white shadow-lg shadow-crimson/30"
-                  : "bg-white/5 border border-white/10 text-gray-300 hover:bg-white/10 hover:border-crimson/50"
+                  ? "bg-red-800 text-white shadow-lg shadow-rose-700/30"
+                  : "bg-white/5 border border-white/30 text-gray-300 hover:bg-white/10 hover:border-rose-500/50"
               }`}
             >
               {cat.label}
