@@ -15,7 +15,7 @@ const ContactSection = () => {
   const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const formSpareUrl = `https://formspree.io/f/${process.env.FROMSPARE_KEY}`;
+  const formSpareUrl = `https://formspree.io/f/${process.env.NEXT_PUBLIC_FORMSPREE_KEY}`;
 
   const validate = () => {
     const newErrors = {};

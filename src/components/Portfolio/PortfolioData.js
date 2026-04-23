@@ -6,7 +6,7 @@ const projectsData = [
       "A modern responsive portfolio website built with Next.js and Tailwind CSS. Features smooth animations, dark mode, and fully responsive design.",
     image: "/images/Portfolio/nextjs-portfolio.jpg",
     demo: "#",
-    github: "https://github.com/anik-bin-sayed/Portfolio-Website",
+    github: "https://github.com/anik-bin-sayed/Next-JS-Portfolio",
     tech: ["Next.js", "Tailwind CSS", "Framer Motion"],
     featured: false,
     category: "frontend",
