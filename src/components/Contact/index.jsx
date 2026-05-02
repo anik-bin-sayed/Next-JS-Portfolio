@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { FiPhone } from "react-icons/fi";
 import { MdOutlineMailOutline } from "react-icons/md";
 
@@ -9,11 +9,32 @@ const initialState = {
   email: "",
   message: "",
 };
+
 const ContactSection = () => {
   const [formData, setFormData] = useState(initialState);
   const [error, setError] = useState({});
   const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
+  const [inView, setInView] = useState(false);
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.2 },
+    );
+
+    const element = sectionRef.current;
+    if (element) observer.observe(element);
+    return () => {
+      if (element) observer.unobserve(element);
+    };
+  }, []);
 
   const formSpareUrl = `https://formspree.io/f/${process.env.NEXT_PUBLIC_FORMSPREE_KEY}`;
 
@@ -92,7 +113,10 @@ const ContactSection = () => {
   }, [success]);
 
   return (
-    <section className="relative w-full bg-black text-white py-20 md:py-28 overflow-hidden">
+    <section
+      ref={sectionRef}
+      className="relative w-full bg-black text-white py-20 md:py-28 overflow-hidden"
+    >
       <div className="absolute inset-0 bg-linear-to-b from-gray-900 via-black to-gray-900" />
 
       <div className="absolute top-20 left-10 w-72 h-72 bg-rose-500/10 blur-[120px] rounded-full" />
@@ -101,24 +125,44 @@ const ContactSection = () => {
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid md:grid-cols-2 gap-12 lg:gap-16">
           <div className="space-y-6">
-            <div className="inline-flex">
+            <div
+              className={`inline-flex transition-all duration-700 ${
+                inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+              }`}
+              style={{ transitionDelay: "100ms" }}
+            >
               <span className="text-xs font-semibold uppercase tracking-wide text-rose-400 border border-rose-500/30 rounded-full px-4 py-1.5 bg-rose-500/5">
                 Contact
               </span>
             </div>
 
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight">
+            <h2
+              className={`text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight transition-all duration-700 ${
+                inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+              }`}
+              style={{ transitionDelay: "200ms" }}
+            >
               LET'S DISCUSS
               <br />
               YOUR PROJECT!
             </h2>
 
-            <p className="text-gray-300 leading-relaxed">
+            <p
+              className={`text-gray-300 leading-relaxed transition-all duration-700 ${
+                inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+              }`}
+              style={{ transitionDelay: "300ms" }}
+            >
               Let’s turn your ideas into reality. I’m open to freelance work,
               collaborations, and exciting new projects.
             </p>
 
-            <div className="space-y-3 pt-4">
+            <div
+              className={`space-y-3 pt-4 transition-all duration-700 ${
+                inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+              }`}
+              style={{ transitionDelay: "400ms" }}
+            >
               <div className="flex items-center gap-3 text-gray-300">
                 <MdOutlineMailOutline className="w-5 h-5 text-rose-400" />
                 <span>anikbinsayed206@gmail.com</span>
@@ -130,7 +174,12 @@ const ContactSection = () => {
             </div>
           </div>
 
-          <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 md:p-8">
+          <div
+            className={`bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 md:p-8 transition-all duration-700 ${
+              inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+            }`}
+            style={{ transitionDelay: "500ms" }}
+          >
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label
@@ -197,7 +246,7 @@ const ContactSection = () => {
 
               <button
                 type="submit"
-                className="w-full py-3 px-6 rounded-lg bg-linear-to-r from-rose-500 to-rose-600 text-white font-semibold hover:from-rose-600 hover:to-rose-700 transition-all duration-300 transform  focus:outline-none focus:ring-0 focus:ring-offset-0 cursor-pointer"
+                className="w-full py-3 px-6 rounded-lg bg-linear-to-r from-rose-500 to-rose-600 text-white font-semibold hover:from-rose-600 hover:to-rose-700 transition-all duration-300 transform focus:outline-none focus:ring-0 focus:ring-offset-0 cursor-pointer"
               >
                 {loading ? "Sending..." : "SUBMIT"}
               </button>

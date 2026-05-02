@@ -1,10 +1,33 @@
-import React from "react";
+"use client";
+
+import React, { useEffect, useRef, useState } from "react";
 import { FaDesktop } from "react-icons/fa";
 import { FiTrendingUp } from "react-icons/fi";
 import { SiVorondesign } from "react-icons/si";
 import { TbWorldCheck } from "react-icons/tb";
 
 const ServiceSegment = () => {
+  const [inView, setInView] = useState(false);
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.2 },
+    );
+
+    const element = sectionRef.current;
+    if (element) observer.observe(element);
+    return () => {
+      if (element) observer.unobserve(element);
+    };
+  }, []);
+
   const services = [
     {
       title: "Web Design",
@@ -33,7 +56,10 @@ const ServiceSegment = () => {
   ];
 
   return (
-    <section className="relative w-full bg-black text-white py-20 md:py-28 overflow-hidden">
+    <section
+      ref={sectionRef}
+      className="relative w-full bg-black text-white py-20 md:py-28 overflow-hidden"
+    >
       <div className="absolute inset-0 bg-linear-to-b from-black to-gray-900" />
 
       <div className="absolute top-20 left-10 w-60 h-60 bg-rose-500/10 blur-[100px] rounded-full" />
@@ -60,7 +86,12 @@ const ServiceSegment = () => {
           {services.map((service, index) => (
             <div
               key={index}
-              className="group relative p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-rose-500/30 transition-all duration-300 hover:scale-[1.02]"
+              className={`group relative p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-rose-500/30 transition-all duration-500 hover:scale-[1.02] ${
+                inView
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-10"
+              }`}
+              style={{ transitionDelay: `${index * 100}ms` }}
             >
               <div className="absolute inset-0 rounded-2xl bg-linear-to-br from-rose-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 

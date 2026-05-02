@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import LinkButton from "@/components/ui/LinkButton";
 
@@ -19,9 +19,31 @@ const skills = [
 ];
 
 const AboutPageTopSection = () => {
+  const [inView, setInView] = useState(false);
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.2 },
+    );
+
+    const element = sectionRef.current;
+    if (element) observer.observe(element);
+    return () => {
+      if (element) observer.unobserve(element);
+    };
+  }, []);
+
   return (
     <section
       id="about"
+      ref={sectionRef}
       className="relative w-full min-h-screen py-20 px-6 md:px-20 bg-[#050505] text-white overflow-hidden flex items-center"
     >
       <div className="absolute top-20 left-10 w-72 h-72 bg-red-600/30 rounded-full blur-[120px] animate-pulse" />
@@ -29,7 +51,12 @@ const AboutPageTopSection = () => {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-purple-600/20 rounded-full blur-[140px]" />
 
       <div className="max-w-6xl mx-auto flex flex-col lg:flex-row items-center gap-12 lg:gap-16 relative z-10">
-        <div className="w-full lg:w-2/5 flex justify-center">
+        <div
+          className={`w-full lg:w-2/5 flex justify-center transition-all duration-700 ${
+            inView ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-10"
+          }`}
+          style={{ transitionDelay: "100ms" }}
+        >
           <div className="relative group">
             <div className="absolute -inset-4 bg-linear-to-r from-red-500/20 via-purple-500/20 to-blue-500/20 rounded-2xl blur-xl opacity-70 group-hover:opacity-100 transition duration-500" />
 
@@ -54,7 +81,12 @@ const AboutPageTopSection = () => {
         </div>
 
         <div className="w-full lg:w-3/5 space-y-6 text-center lg:text-left">
-          <div className="relative inline-block mx-auto lg:mx-0">
+          <div
+            className={`relative inline-block mx-auto lg:mx-0 transition-all duration-700 ${
+              inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+            }`}
+            style={{ transitionDelay: "150ms" }}
+          >
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold">
               <span className="bg-linear-to-r from-red-500 via-orange-400 to-amber-500 bg-clip-text text-transparent">
                 {ABOUT_TEXT.title}
@@ -63,23 +95,36 @@ const AboutPageTopSection = () => {
             <div className="absolute -bottom-2 left-0 w-20 h-1 bg-linear-to-r from-red-500 to-orange-400 rounded-full mx-auto lg:mx-0" />
           </div>
 
-          <div className="backdrop-blur-sm bg-white/5 rounded-2xl p-6 border border-white/10 shadow-xl">
+          <div
+            className={`backdrop-blur-sm bg-white/5 rounded-2xl p-6 border border-white/10 shadow-xl transition-all duration-700 ${
+              inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+            }`}
+            style={{ transitionDelay: "250ms" }}
+          >
             <p className="text-gray-300 text-base md:text-lg leading-relaxed">
               {ABOUT_TEXT.desc}
             </p>
           </div>
 
-          <div className="space-y-3">
+          <div
+            className={`space-y-3 transition-all duration-700 ${
+              inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+            }`}
+            style={{ transitionDelay: "350ms" }}
+          >
             <h3 className="text-sm uppercase tracking-wider text-gray-400 font-semibold flex items-center justify-center lg:justify-start gap-2">
               <span className="w-8 h-px bg-red-500/50" />
               Core Expertise
               <span className="w-8 h-px bg-red-500/50" />
             </h3>
             <div className="flex flex-wrap gap-3 justify-center lg:justify-start">
-              {skills.map((skill) => (
+              {skills.map((skill, idx) => (
                 <span
                   key={skill}
-                  className="group relative px-4 py-2 text-sm font-medium bg-white/5 border border-white/10 rounded-full hover:border-red-500 hover:bg-red-500/10 transition-all duration-300 cursor-default overflow-hidden"
+                  className={`group relative px-4 py-2 text-sm font-medium bg-white/5 border border-white/10 rounded-full hover:border-red-500 hover:bg-red-500/10 transition-all duration-300 cursor-default overflow-hidden ${
+                    inView ? "opacity-100 scale-100" : "opacity-0 scale-90"
+                  }`}
+                  style={{ transitionDelay: `${450 + idx * 40}ms` }}
                 >
                   <span className="relative z-10 flex items-center gap-2">
                     <span className="w-1.5 h-1.5 rounded-full bg-red-500 group-hover:scale-150 transition-transform" />
@@ -91,7 +136,12 @@ const AboutPageTopSection = () => {
             </div>
           </div>
 
-          <div className="pt-4 flex justify-center lg:justify-start">
+          <div
+            className={`pt-4 flex justify-center lg:justify-start transition-all duration-700 ${
+              inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+            }`}
+            style={{ transitionDelay: "650ms" }}
+          >
             <LinkButton
               text="Download CV"
               isDownload={true}

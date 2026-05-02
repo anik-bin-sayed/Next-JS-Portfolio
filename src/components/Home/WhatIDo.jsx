@@ -1,10 +1,33 @@
-import React from "react";
+"use client";
+
+import React, { useEffect, useRef, useState } from "react";
 import LinkButton from "../ui/LinkButton";
 import { FaDesktop } from "react-icons/fa";
 import { TbWorldCheck } from "react-icons/tb";
 import { SiVorondesign } from "react-icons/si";
 
 const WhatIDo = () => {
+  const [inView, setInView] = useState(false);
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.2 },
+    );
+
+    const element = sectionRef.current;
+    if (element) observer.observe(element);
+    return () => {
+      if (element) observer.unobserve(element);
+    };
+  }, []);
+
   const services = [
     {
       title: "WEB DESIGN",
@@ -25,8 +48,12 @@ const WhatIDo = () => {
       icon: <TbWorldCheck className="w-8 h-8 text-rose-400" />,
     },
   ];
+
   return (
-    <section className="relative w-full bg-black text-white py-20 md:py-28 overflow-hidden">
+    <section
+      ref={sectionRef}
+      className="relative w-full bg-black text-white py-20 md:py-28 overflow-hidden"
+    >
       <div className="absolute inset-0 bg-linear-to-b from-gray-900 via-black to-gray-900" />
 
       <div className="absolute top-20 left-1/4 w-72 h-72 bg-rose-500/10 blur-[100px] rounded-full" />
@@ -34,12 +61,23 @@ const WhatIDo = () => {
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12 md:mb-16">
-          <div className="inline-flex mb-4">
+          <div
+            className={`inline-flex mb-4 transition-all duration-700 ${
+              inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+            }`}
+            style={{ transitionDelay: "100ms" }}
+          >
             <span className="text-xs font-semibold uppercase tracking-wide text-rose-400 border border-rose-500/30 rounded-full px-4 py-1.5 bg-rose-500/5">
               What I Do
             </span>
           </div>
-          <div>
+
+          <div
+            className={`transition-all duration-700 ${
+              inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+            }`}
+            style={{ transitionDelay: "200ms" }}
+          >
             <h2 className="text-xl sm:text-xl md:text-2xl font-medium tracking-tight mb-4">
               From understanding your requirements,
               <br />
@@ -54,7 +92,12 @@ const WhatIDo = () => {
           {services.map((service, index) => (
             <div
               key={index}
-              className="group relative p-6 md:p-8 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-rose-500/30 transition-all duration-300 hover:scale-[1.02]"
+              className={`group relative p-6 md:p-8 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-rose-500/30 transition-all duration-300 hover:scale-[1.02] ${
+                inView
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-10"
+              }`}
+              style={{ transitionDelay: `${300 + index * 100}ms` }}
             >
               <div className="absolute inset-0 rounded-2xl bg-linear-to-br from-rose-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 

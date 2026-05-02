@@ -7,19 +7,37 @@ import Link from "next/link";
 import LinkButton from "../ui/LinkButton";
 
 const HeroSection = () => {
+  const [inView, setInView] = useState(false);
+  const sectionRef = useRef(null);
   const imageRef = useRef(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+  // Intersection Observer for entrance animation
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 },
+    );
+
+    const element = sectionRef.current;
+    if (element) observer.observe(element);
+    return () => {
+      if (element) observer.unobserve(element);
+    };
+  }, []);
 
   const handleMouseMove = (e) => {
     if (!imageRef.current) return;
     const rect = imageRef.current.getBoundingClientRect();
-
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
-
     const rotateX = (y - rect.height / 2) / 25;
     const rotateY = (rect.width / 2 - x) / 25;
-
     imageRef.current.style.transform = `
       perspective(1200px)
       rotateX(${rotateX}deg)
@@ -36,22 +54,22 @@ const HeroSection = () => {
 
   useEffect(() => {
     let frame;
-
     const handleMove = (e) => {
       if (frame) return;
-
       frame = requestAnimationFrame(() => {
         setMousePosition({ x: e.clientX, y: e.clientY });
         frame = null;
       });
     };
-
     window.addEventListener("mousemove", handleMove);
     return () => window.removeEventListener("mousemove", handleMove);
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center bg-[#050505] text-white overflow-hidden px-4 sm:px-6">
+    <section
+      ref={sectionRef}
+      className="relative min-h-screen flex items-center justify-center bg-[#050505] text-white overflow-hidden px-4 sm:px-6"
+    >
       <div className="absolute inset-0 bg-linear-to-br from-[#0a0a0a] via-[#0f0f0f] to-[#050505]" />
       <div
         className="absolute w-125 h-125 bg-red-600/20 blur-[80px] rounded-full"
@@ -71,27 +89,47 @@ const HeroSection = () => {
 
       <div className="max-w-7xl w-full grid lg:grid-cols-2 gap-10 items-center z-10 py-20">
         <div className="space-y-6 text-center lg:text-left">
-          <p className="text-sm text-red-400 uppercase tracking-widest">
+          <p
+            className={`text-sm text-red-400 uppercase tracking-widest transition-all duration-700 ${
+              inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+            }`}
+            style={{ transitionDelay: "100ms" }}
+          >
             Welcome To my portfolio
           </p>
 
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold">
+          <h1
+            className={`text-5xl md:text-6xl lg:text-7xl font-bold transition-all duration-700 ${
+              inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+            }`}
+            style={{ transitionDelay: "200ms" }}
+          >
             Hi, I'm <br />
             <span className="bg-linear-to-r from-red-500 to-orange-400 bg-clip-text text-transparent">
               Anik
             </span>
           </h1>
 
-          <p className="text-gray-400 max-w-lg mx-auto lg:mx-0">
+          <p
+            className={`text-gray-400 max-w-lg mx-auto lg:mx-0 transition-all duration-700 ${
+              inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+            }`}
+            style={{ transitionDelay: "300ms" }}
+          >
             I build exceptional and accessible digital experiences for the web.
             Focused on creating elegant solutions to complex problems.
           </p>
-          <div className="flex gap-4 justify-center lg:justify-start">
+
+          <div
+            className={`flex gap-4 justify-center lg:justify-start transition-all duration-700 ${
+              inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+            }`}
+            style={{ transitionDelay: "400ms" }}
+          >
             <LinkButton
               text="View Work (Github)"
               link="https://github.com/anik-bin-sayed"
             />
-
             <Link
               href="/contact"
               className="px-6 py-3 rounded-lg border border-gray-600 hover:border-red-500 transition"
@@ -100,7 +138,13 @@ const HeroSection = () => {
             </Link>
           </div>
         </div>
-        <div className="flex justify-center lg:justify-end relative">
+
+        <div
+          className={`flex justify-center lg:justify-end relative transition-all duration-700 ${
+            inView ? "opacity-100 scale-100" : "opacity-0 scale-90"
+          }`}
+          style={{ transitionDelay: "500ms" }}
+        >
           <div
             ref={imageRef}
             onMouseMove={handleMouseMove}
@@ -125,11 +169,42 @@ const HeroSection = () => {
             <div className="absolute -top-4 -right-4 w-3 h-3 bg-red-500 rounded-full animate-ping"></div>
             <div className="absolute -bottom-3 -left-3 w-2 h-2 bg-purple-400 rounded-full animate-pulse"></div>
           </div>
-          <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 lg:left-auto lg:right-0 lg:translate-x-0 flex gap-3 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/10 shadow-lg">
+
+          <div
+            className={`absolute -bottom-6 left-1/2 -translate-x-1/2 lg:left-auto lg:right-0 lg:translate-x-0 flex gap-3 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/10 shadow-lg transition-all duration-700 ${
+              inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+            }`}
+            style={{ transitionDelay: "600ms" }}
+          >
             <SocialIcons />
           </div>
         </div>
       </div>
+
+      <style jsx>{`
+        @keyframes spin-slow {
+          from {
+            transform: rotate(0deg);
+          }
+          to {
+            transform: rotate(360deg);
+          }
+        }
+        @keyframes spin-slow-reverse {
+          from {
+            transform: rotate(360deg);
+          }
+          to {
+            transform: rotate(0deg);
+          }
+        }
+        .animate-spin-slow {
+          animation: spin-slow 20s linear infinite;
+        }
+        .animate-spin-slow-reverse {
+          animation: spin-slow-reverse 25s linear infinite;
+        }
+      `}</style>
     </section>
   );
 };

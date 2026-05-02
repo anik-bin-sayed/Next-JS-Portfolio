@@ -1,10 +1,12 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import LinkButton from "../ui/LinkButton";
 
 const AboutHomeSection = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [inView, setInView] = useState(false);
+  const sectionRef = useRef(null);
 
   useEffect(() => {
     let frame;
@@ -21,8 +23,45 @@ const AboutHomeSection = () => {
     return () => window.removeEventListener("mousemove", handleMove);
   }, []);
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.2 },
+    );
+
+    const element = sectionRef.current;
+    if (element) observer.observe(element);
+    return () => {
+      if (element) observer.unobserve(element);
+    };
+  }, []);
+
+  const techStack = [
+    "Python",
+    "Django",
+    "React",
+    "Next.js",
+    "TypeScript",
+    "Node.js",
+    "Tailwind CSS",
+  ];
+
+  const cards = [
+    "I am a passionate web developer focused on building modern and scalable web applications. I am strengthening my skills in React, Next.js, and backend technologies while continuously improving my problem-solving abilities.",
+    "I enjoy turning ideas into real-world projects. From designing responsive user interfaces to working with APIs and databases, I am constantly exploring new tools and best practices to write clean and efficient code.",
+    "I am highly motivated to grow as a software developer and build impactful products. I believe in continuous learning, experimenting with new technologies, and improving every day to reach a professional level in the tech industry.",
+  ];
+
   return (
-    <section className="relative min-h-screen flex items-center justify-center bg-black text-white overflow-hidden px-4 sm:px-6 py-20 md:py-28">
+    <section
+      ref={sectionRef}
+      className="relative min-h-screen flex items-center justify-center bg-black text-white overflow-hidden px-4 sm:px-6 py-20 md:py-28"
+    >
       <div className="absolute inset-0 bg-linear-to-b from-black to-gray-900" />
 
       <div
@@ -34,7 +73,12 @@ const AboutHomeSection = () => {
 
       <div className="max-w-7xl w-full mx-auto relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
-          <div className="space-y-6">
+          <div
+            className={`space-y-6 transition-all duration-700 ${
+              inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+            }`}
+            style={{ transitionDelay: "100ms" }}
+          >
             <div className="inline-flex">
               <span className="text-xs font-semibold uppercase tracking-tight text-red-500 border border-red-500 rounded-full px-4 py-1.5 bg-rose-500/5">
                 About Me
@@ -59,15 +103,7 @@ const AboutHomeSection = () => {
             </div>
 
             <div className="flex flex-wrap gap-2 pt-4">
-              {[
-                "Python",
-                "Django",
-                "React",
-                "Next.js",
-                "TypeScript",
-                "Node.js",
-                "Tailwind CSS",
-              ].map((tech, index) => (
+              {techStack.map((tech, index) => (
                 <span
                   key={index}
                   className="px-3 py-1 text-xs rounded-full bg-white/5 border hover:border-red-600 border-white/10 text-gray-300"
@@ -83,34 +119,21 @@ const AboutHomeSection = () => {
           </div>
 
           <div className="space-y-6">
-            <div className="space-y-5">
-              <div className="p-5 rounded-xl bg-white/5 border border-white/10">
+            {cards.map((text, idx) => (
+              <div
+                key={idx}
+                className={`p-5 rounded-xl bg-white/5 border border-white/10 transition-all duration-700 ${
+                  inView
+                    ? "opacity-100 translate-y-0"
+                    : "opacity-0 translate-y-10"
+                }`}
+                style={{ transitionDelay: `${200 + idx * 100}ms` }}
+              >
                 <p className="text-gray-300 leading-relaxed text-justify">
-                  I am a passionate web developer focused on building modern and
-                  scalable web applications.I am strengthening my skills in
-                  React, Next.js, and backend technologies while continuously
-                  improving my problem-solving abilities.
+                  {text}
                 </p>
               </div>
-
-              <div className="p-5 rounded-xl bg-white/5 border border-white/10">
-                <p className="text-gray-300 leading-relaxed text-justify">
-                  I enjoy turning ideas into real-world projects. From designing
-                  responsive user interfaces to working with APIs and databases,
-                  I am constantly exploring new tools and best practices to
-                  write clean and efficient code.
-                </p>
-              </div>
-
-              <div className="p-5 rounded-xl bg-white/5 border border-white/10">
-                <p className="text-gray-300 leading-relaxed text-justify">
-                  I am highly motivated to grow as a software developer and
-                  build impactful products. I believe in continuous learning,
-                  experimenting with new technologies, and improving every day
-                  to reach a professional level in the tech industry.
-                </p>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </div>

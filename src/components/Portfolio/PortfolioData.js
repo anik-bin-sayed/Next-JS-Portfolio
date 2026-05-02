@@ -17,7 +17,7 @@ const projectsData = [
     description:
       "A modern responsive portfolio website built with React and Tailwind CSS. Features smooth animations, dark mode, and fully responsive design.",
     image: "/images/Portfolio/portfolio.png",
-    demo: "#",
+    demo: "https://anik-bin-sayed.netlify.app/",
     github: "https://github.com/anik-bin-sayed/Portfolio-Website",
     tech: ["React", "Tailwind CSS", "Framer Motion"],
     featured: false,

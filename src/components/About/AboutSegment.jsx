@@ -1,11 +1,33 @@
-import React from "react";
-import { AiTwotoneDollarCircle } from "react-icons/ai";
+"use client";
+
+import React, { useEffect, useRef, useState } from "react";
 import { BiDollarCircle } from "react-icons/bi";
 import { FaRegEye, FaSearch } from "react-icons/fa";
 import { PiTimerLight } from "react-icons/pi";
 import { TiSupport } from "react-icons/ti";
 
 const AboutSegment = () => {
+  const [inView, setInView] = useState(false);
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.2 },
+    );
+
+    const element = sectionRef.current;
+    if (element) observer.observe(element);
+    return () => {
+      if (element) observer.unobserve(element);
+    };
+  }, []);
+
   const reasons = [
     {
       title: "Clean & Modern Code",
@@ -60,7 +82,10 @@ const AboutSegment = () => {
   ];
 
   return (
-    <section className="relative w-full bg-black text-white py-20 md:py-28 overflow-hidden">
+    <section
+      ref={sectionRef}
+      className="relative w-full bg-black text-white py-20 md:py-28 overflow-hidden"
+    >
       <div className="absolute inset-0 bg-linear-to-b from-black to-gray-900" />
 
       <div className="absolute top-20 left-10 w-60 h-60 bg-rose-500/10 blur-[100px] rounded-full" />
@@ -86,7 +111,12 @@ const AboutSegment = () => {
           {reasons.map((reason, index) => (
             <div
               key={index}
-              className="group relative p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-rose-500/30 transition-all duration-300 hover:scale-[1.02]"
+              className={`group relative p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-rose-500/30 transition-all duration-300 hover:scale-[1.02] ${
+                inView
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-10"
+              }`}
+              style={{ transitionDelay: `${index * 80}ms` }}
             >
               <div className="absolute inset-0 rounded-2xl bg-linear-to-br from-rose-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
