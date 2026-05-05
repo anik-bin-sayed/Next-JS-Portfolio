@@ -24,7 +24,13 @@ export default function RootLayout({ children }) {
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
+      <head>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap"
+          rel="stylesheet"
+        />
+      </head>
+      <body className="min-h-screen flex flex-col bg-white">
         <Navbar />
         {children}
         <Footer />

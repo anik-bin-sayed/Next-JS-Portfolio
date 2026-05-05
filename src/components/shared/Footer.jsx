@@ -34,10 +34,6 @@ const Footer = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
   return (
     <footer className="relative w-full bg-gray-900 text-white overflow-hidden">
       <div className="absolute top-0 left-0 w-100 h-100 bg-red-600/5 blur-[120px] rounded-full animate-pulse" />
@@ -105,19 +101,8 @@ const Footer = () => {
           </div>
         </div>
 
-        {showButton && (
-          <button
-            onClick={scrollToTop}
-            className="fixed bottom-6 right-6 z-50 group flex items-center gap-2 text-gray-400 hover:text-red-500 transition-all text-sm bg-white/5 backdrop-blur-sm px-4 py-2 rounded-full hover:bg-red-500/10 shadow-lg animate-fadeIn"
-          >
-            <span>Back to top</span>
-            <FaArrowUpLong className="h-4 w-4 group-hover:-translate-y-1 transition-transform" />
-          </button>
-        )}
         <div
-          className={`fixed right-6 z-50 group flex items-center gap-2 text-green-500 transition-all text-sm bg-white/5 backdrop-blur-sm px-3 py-3 rounded-full hover:bg-green-700/10 shadow-lg animate-fadeIn ${
-            showButton ? "bottom-20" : "bottom-6"
-          }`}
+          className={`fixed right-6 z-50 group flex items-center gap-2 text-green-500 transition-all text-sm bg-white/5 backdrop-blur-sm px-3 py-3 rounded-full hover:bg-green-700/10 shadow-lg animate-fadeIn bottom-6`}
         >
           <a
             href="https://wa.me/8801616176409?text=Hello%20Anik%2C%20I%20saw%20your%20portfolio"
@@ -132,7 +117,7 @@ const Footer = () => {
             className="absolute right-16 bg-black text-white text-xs px-2 py-1 rounded-md 
     opacity-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap"
           >
-            Message on WhatsApp
+            WhatsApp
           </span>
         </div>
       </div>
